@@ -5,7 +5,7 @@
     "url": "https://github.com/cezaraugusto/safari-location2.git"
   },
   "name": "safari-location2",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Approximates the current location of the Safari browser across platforms.",
   "homepage": "https://www.npmjs.com/package/safari-location2",
   "type": "module",
