@@ -22,7 +22,7 @@
     "dist"
   ],
   "bin": {
-    "safari-location2": "bin.js"
+    "safari-location2": "bin.cjs"
   },
   "scripts": {
     "build": "rslib build",
@@ -50,7 +50,6 @@
     "guesstimate"
   ],
   "dependencies": {
-    "userhome": "^1.0.0",
     "which": "^2.0.2"
   },
   "devDependencies": {

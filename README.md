@@ -58,6 +58,11 @@ Returns the first existing path found (given selected channels), or <code>null</
 
 ```js
 import safariLocation from "safari-location2";
+import {
+  locateSafariOrExplain,
+  getInstallGuidance,
+  getSafariVersion
+} from "safari-location2";
 
 // Strict (Stable only)
 console.log(safariLocation());
@@ -66,6 +71,18 @@ console.log(safariLocation());
 // Enable fallback (Stable / Technology Preview)
 console.log(safariLocation(true));
 // => first found among Stable/Technology Preview or null
+
+// Throw with a friendly guide when not found
+try {
+  const bin = locateSafariOrExplain({allowFallback: true});
+  console.log(bin);
+
+  // Version (no exec by default)
+  console.log(getSafariVersion(bin)); // e.g. "17.6" or null
+} catch (e) {
+  console.error(String(e));
+  // Or print getInstallGuidance() explicitly
+}
 ```
 
 **Via CLI:**
@@ -76,7 +93,30 @@ npx safari-location2
 
 npx safari-location2 --fallback
 # Enable cascade (Stable / Technology Preview)
+
+# Respect environment overrides
+SAFARI_BINARY=/custom/path/to/Safari npx safari-location2
+
+# Print browser version (empty + exit code 2 if unavailable)
+npx safari-location2 --safari-version
+npx safari-location2 --browser-version
+
+# Opt-in: allow executing the binary to fetch version
+npx safari-location2 --browser-version --allow-exec
 ```
+
+### Environment overrides
+
+If this environment variable is set and points to an existing binary, it takes precedence:
+
+- `SAFARI_BINARY`
+
+## API
+
+- `default export locateSafari(allowFallback?: boolean): string | null`
+- `locateSafariOrExplain(options?: boolean | { allowFallback?: boolean }): string`
+- `getSafariVersion(bin: string, opts?: { allowExec?: boolean }): string | null`
+- `getInstallGuidance(): string`
 
 ## Related projects
 
