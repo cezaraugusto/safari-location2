@@ -122,7 +122,7 @@ If this environment variable is set and points to an existing binary, it takes p
 
 ### Toolchain detection
 
-Building Safari web extensions requires more than the browser itself ,
+Building Safari web extensions requires more than the browser itself:
 `safari-web-extension-converter` and `xcodebuild` ship with full Xcode
 (the Command Line Tools alone are not enough). `detectSafariToolchain()`
 reports what is available:

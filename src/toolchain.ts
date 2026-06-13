@@ -58,7 +58,7 @@ function findWithXcrun(spawn: SpawnSyncLike, tool: string): string | null {
 /**
  * Detect the macOS toolchain required to build Safari web extensions:
  * the active developer directory, `safari-web-extension-converter`, and
- * `xcodebuild`. The Command Line Tools alone are not enough — the converter
+ * `xcodebuild`. The Command Line Tools alone are not enough; the converter
  * ships only with full Xcode, which `needsFullXcode` reports.
  */
 export function detectSafariToolchain(deps?: ToolchainDeps): SafariToolchain {
