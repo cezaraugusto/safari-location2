@@ -5,6 +5,9 @@ import scanOsxPath from './scan-osx-path';
 import scanWindowsPath from './scan-windows-path';
 import scanUnknownPlatformPath from './scan-unknown-platform-path';
 
+export { detectSafariToolchain, isMacOS } from './toolchain';
+export type { SafariToolchain, SpawnSyncLike, ToolchainDeps } from './toolchain';
+
 export type FsLike = Pick<typeof fs, 'existsSync' | 'readdirSync'>;
 export type WhichLike = { sync: (cmd: string) => string };
 export type Deps = {

@@ -117,6 +117,29 @@ If this environment variable is set and points to an existing binary, it takes p
 - `locateSafariOrExplain(options?: boolean | { allowFallback?: boolean }): string`
 - `getSafariVersion(bin: string, opts?: { allowExec?: boolean }): string | null`
 - `getInstallGuidance(): string`
+- `detectSafariToolchain(deps?: ToolchainDeps): SafariToolchain`
+- `isMacOS(platform?: NodeJS.Platform): boolean`
+
+### Toolchain detection
+
+Building Safari web extensions requires more than the browser itself ,
+`safari-web-extension-converter` and `xcodebuild` ship with full Xcode
+(the Command Line Tools alone are not enough). `detectSafariToolchain()`
+reports what is available:
+
+```js
+import { detectSafariToolchain } from 'safari-location2'
+
+const toolchain = detectSafariToolchain()
+// {
+//   platformOk: true,            // running on macOS
+//   developerDir: '/Applications/Xcode.app/Contents/Developer',
+//   needsFullXcode: false,       // true when only Command Line Tools are active
+//   converter: '/usr/bin/safari-web-extension-converter',
+//   xcodebuild: '/usr/bin/xcodebuild',
+//   ok: true                     // converter + xcodebuild both resolved
+// }
+```
 
 ## Related projects
 
