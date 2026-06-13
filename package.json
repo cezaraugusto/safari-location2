@@ -44,10 +44,17 @@
   "keywords": [
     "safari",
     "browser",
-    "spawn",
     "location",
-    "process",
-    "guesstimate"
+    "path",
+    "binary",
+    "detect",
+    "detection",
+    "macos",
+    "xcode",
+    "xcodebuild",
+    "safari-web-extension",
+    "toolchain",
+    "cli"
   ],
   "dependencies": {
     "which": "^2.0.2"
