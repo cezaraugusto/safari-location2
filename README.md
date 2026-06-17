@@ -1,4 +1,4 @@
-[npm-version-image]: https://img.shields.io/npm/v/safari-location2.svg?color=0A84FF
+[npm-version-image]: https://img.shields.io/npm/v/safari-location2.svg?color=0971fe
 [npm-version-url]: https://www.npmjs.com/package/safari-location2
 [npm-downloads-image]: https://img.shields.io/npm/dm/safari-location2.svg?color=2ecc40
 [npm-downloads-url]: https://www.npmjs.com/package/safari-location2
@@ -6,7 +6,7 @@
 [action-url]: https://github.com/cezaraugusto/safari-location2/actions
 
 > Approximates the current location of the Safari browser across platforms.
-  
+
 # safari-location2 [![Version][npm-version-image]][npm-version-url] [![Downloads][npm-downloads-image]][npm-downloads-url] [![workflow][action-image]][action-url]
 
 <img alt="Safari" align="right" src="https://cdn.jsdelivr.net/gh/extension-js/media@9ef31f005a0192907d9f6405838e43776aca2124/browser_logos/svg/safari.svg" width="10.5%" />
