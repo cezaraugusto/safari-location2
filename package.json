@@ -72,5 +72,6 @@
   "bugs": "https://github.com/cezaraugusto/safari-location2/issues",
   "engines": {
     "node": ">=18"
-  }
+  },
+  "sideEffects": false
 }
