@@ -1,6 +1,6 @@
-export default function scanWindowsPath(
+export default function scanWindowsPath (
   allowFallback = false,
-  _deps?: unknown,
+  _deps?: unknown
 ) {
-  return null;
+  return null
 }
