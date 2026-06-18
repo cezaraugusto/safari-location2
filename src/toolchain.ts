@@ -1,4 +1,4 @@
-import { spawnSync } from 'node:child_process';
+import {spawnSync} from 'node:child_process'
 
 export interface SafariToolchain {
   platformOk: boolean;
@@ -12,46 +12,49 @@ export interface SafariToolchain {
 export type SpawnSyncLike = (
   command: string,
   args: string[],
-  options: { encoding: 'utf8'; timeout: number },
-) => { status: number | null; stdout: string };
+  options: {encoding: 'utf8'; timeout: number}
+) => {status: number | null; stdout: string}
 
 export type ToolchainDeps = {
   spawnSync?: SpawnSyncLike;
   platform?: NodeJS.Platform;
-};
-
-export function isMacOS(platform?: NodeJS.Platform): boolean {
-  return (platform ?? process.platform) === 'darwin';
 }
 
-function activeDeveloperDir(spawn: SpawnSyncLike): string | null {
+export function isMacOS (platform?: NodeJS.Platform): boolean {
+  return (platform ?? process.platform) === 'darwin'
+}
+
+function activeDeveloperDir (spawn: SpawnSyncLike): string | null {
   try {
     const result = spawn('xcode-select', ['-p'], {
       encoding: 'utf8',
-      timeout: 15000,
-    });
+      timeout: 15000
+    })
 
-    if (result.status !== 0) return null;
+    if (result.status !== 0) return null
 
-    const resolved = String(result.stdout || '').trim();
-    return resolved.length > 0 ? resolved : null;
+    const resolved = String(result.stdout || '').trim()
+
+    return resolved.length > 0 ? resolved : null
   } catch {
-    return null;
+    return null
   }
 }
 
-function findWithXcrun(spawn: SpawnSyncLike, tool: string): string | null {
+function findWithXcrun (spawn: SpawnSyncLike, tool: string): string | null {
   try {
     const result = spawn('xcrun', ['--find', tool], {
       encoding: 'utf8',
-      timeout: 15000,
-    });
-    if (result.status !== 0) return null;
+      timeout: 15000
+    })
 
-    const resolved = String(result.stdout || '').trim();
-    return resolved.length > 0 ? resolved : null;
+    if (result.status !== 0) return null
+
+    const resolved = String(result.stdout || '').trim()
+
+    return resolved.length > 0 ? resolved : null
   } catch {
-    return null;
+    return null
   }
 }
 
@@ -61,10 +64,11 @@ function findWithXcrun(spawn: SpawnSyncLike, tool: string): string | null {
  * `xcodebuild`. The Command Line Tools alone are not enough; the converter
  * ships only with full Xcode, which `needsFullXcode` reports.
  */
-export function detectSafariToolchain(deps?: ToolchainDeps): SafariToolchain {
-  const spawn: SpawnSyncLike = deps?.spawnSync ?? spawnSync;
+export function detectSafariToolchain (deps?: ToolchainDeps): SafariToolchain {
+  const spawn: SpawnSyncLike = deps?.spawnSync ?? spawnSync
 
-  const platformOk = isMacOS(deps?.platform);
+  const platformOk = isMacOS(deps?.platform)
+
   if (!platformOk) {
     return {
       platformOk: false,
@@ -72,17 +76,17 @@ export function detectSafariToolchain(deps?: ToolchainDeps): SafariToolchain {
       needsFullXcode: false,
       converter: null,
       xcodebuild: null,
-      ok: false,
-    };
+      ok: false
+    }
   }
 
-  const developerDir = activeDeveloperDir(spawn);
+  const developerDir = activeDeveloperDir(spawn)
   // The CLT path (or no active dir) cannot provide safari-web-extension-converter
   const needsFullXcode =
-    !developerDir || /CommandLineTools/i.test(developerDir);
+    !developerDir || /CommandLineTools/i.test(developerDir)
 
-  const converter = findWithXcrun(spawn, 'safari-web-extension-converter');
-  const xcodebuild = findWithXcrun(spawn, 'xcodebuild');
+  const converter = findWithXcrun(spawn, 'safari-web-extension-converter')
+  const xcodebuild = findWithXcrun(spawn, 'xcodebuild')
 
   return {
     platformOk,
@@ -90,6 +94,6 @@ export function detectSafariToolchain(deps?: ToolchainDeps): SafariToolchain {
     needsFullXcode,
     converter,
     xcodebuild,
-    ok: Boolean(converter && xcodebuild),
-  };
+    ok: Boolean(converter && xcodebuild)
+  }
 }

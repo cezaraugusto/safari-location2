@@ -1,6 +1,6 @@
-export default function scanUnknownPlatform(
+export default function scanUnknownPlatform (
   allowFallback = false,
-  _deps?: unknown,
+  _deps?: unknown
 ) {
-  return null;
+  return null
 }
