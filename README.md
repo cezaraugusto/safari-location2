@@ -78,7 +78,7 @@ console.log(safariLocation())
 console.log(safariLocation(true))
 // => first found among Stable/Technology Preview or null
 
-// Throw with a friendly guide when not found
+// Throw with an install guide when not found
 try {
   const bin = locateSafariOrExplain({allowFallback: true})
   console.log(bin)
