@@ -11,9 +11,15 @@
 
 <img alt="Safari" align="right" src="https://cdn.jsdelivr.net/gh/extension-js/media@9ef31f005a0192907d9f6405838e43776aca2124/browser_logos/svg/safari.svg" width="10.5%" />
 
-* By default checks only `stable`. Optionally can cascade to `Technology Preview`.
-* Supports macOS
-* Works both as an ES module or CommonJS
+- By default checks only `stable`. Optionally can cascade to `Technology Preview`.
+- Supports macOS
+- Works both as an ES module or CommonJS
+
+## Installation
+
+```bash
+npm i safari-location2
+```
 
 ## Support table
 
@@ -57,32 +63,39 @@ Returns the first existing path found (given selected channels), or <code>null</
 **Via Node.js (strict by default):**
 
 ```js
-import safariLocation from "safari-location2";
+import safariLocation from 'safari-location2'
 import {
   locateSafariOrExplain,
   getInstallGuidance,
   getSafariVersion
-} from "safari-location2";
+} from 'safari-location2'
 
 // Strict (Stable only)
-console.log(safariLocation());
+console.log(safariLocation())
 // => "/Applications/Safari.app/Contents/MacOS/Safari" or null
 
 // Enable fallback (Stable / Technology Preview)
-console.log(safariLocation(true));
+console.log(safariLocation(true))
 // => first found among Stable/Technology Preview or null
 
 // Throw with a friendly guide when not found
 try {
-  const bin = locateSafariOrExplain({allowFallback: true});
-  console.log(bin);
+  const bin = locateSafariOrExplain({allowFallback: true})
+  console.log(bin)
 
   // Version (no exec by default)
-  console.log(getSafariVersion(bin)); // e.g. "17.6" or null
+  console.log(getSafariVersion(bin)) // e.g. "17.6" or null
 } catch (e) {
-  console.error(String(e));
+  console.error(String(e))
   // Or print getInstallGuidance() explicitly
 }
+```
+
+**CommonJS:**
+
+```js
+const api = require('safari-location2')
+const locateSafari = api.default || api
 ```
 
 **Via CLI:**
@@ -143,15 +156,16 @@ const toolchain = detectSafariToolchain()
 
 ## Related projects
 
-* [brave-location](https://github.com/cezaraugusto/brave-location)
-* [chrome-location2](https://github.com/cezaraugusto/chrome-location2)
-* [edge-location](https://github.com/cezaraugusto/edge-location)
-* [firefox-location2](https://github.com/cezaraugusto/firefox-location2)
-* [opera-location2](https://github.com/cezaraugusto/opera-location2)
-* [vivaldi-location2](https://github.com/cezaraugusto/vivaldi-location2)
-* [yandex-location](https://github.com/cezaraugusto/yandex-location)
-* [librewolf-location](https://github.com/cezaraugusto/librewolf-location)
-* [waterfox-location](https://github.com/cezaraugusto/waterfox-location)
+- [brave-location](https://github.com/cezaraugusto/brave-location)
+- [chrome-location2](https://github.com/cezaraugusto/chrome-location2)
+- [chromium-location](https://github.com/cezaraugusto/chromium-location)
+- [edge-location](https://github.com/cezaraugusto/edge-location)
+- [firefox-location2](https://github.com/cezaraugusto/firefox-location2)
+- [opera-location2](https://github.com/cezaraugusto/opera-location2)
+- [vivaldi-location2](https://github.com/cezaraugusto/vivaldi-location2)
+- [waterfox-location](https://github.com/cezaraugusto/waterfox-location)
+- [librewolf-location](https://github.com/cezaraugusto/librewolf-location)
+- [yandex-location](https://github.com/cezaraugusto/yandex-location)
 
 ## License
 
