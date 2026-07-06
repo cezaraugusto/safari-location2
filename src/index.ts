@@ -56,16 +56,51 @@ export default function locateSafari (
   return found
 }
 
-export function getInstallGuidance (): string {
-  return [
+export type InstallGuidanceStep = {
+  summary: string;
+  command: string;
+}
+
+export type InstallGuidanceOptions = {
+  // Caller-provided install steps replacing the default macOS-only hint.
+  // Tools that manage their own browser installs pass their own installer
+  // commands here; with no steps the default guidance is kept.
+  steps?: InstallGuidanceStep[];
+}
+
+export function getInstallGuidance (opts?: InstallGuidanceOptions): string {
+  const steps = opts?.steps?.length ? opts.steps : null
+
+  if (!steps) {
+    return [
+      "We couldn't find a Safari browser on this machine.",
+      '',
+      'Safari is only available on macOS.',
+      '',
+      'If you are on macOS and this still fails, try:',
+      '- checking that Safari is installed in /Applications',
+      '- setting SAFARI_BINARY=/path/to/Safari and re-running'
+    ].join('\n')
+  }
+
+  const lines = [
     "We couldn't find a Safari browser on this machine.",
     '',
-    'Safari is only available on macOS.',
-    '',
-    'If you are on macOS and this still fails, try:',
-    '- checking that Safari is installed in /Applications',
-    '- setting SAFARI_BINARY=/path/to/Safari and re-running'
-  ].join('\n')
+    'To install one:',
+    ''
+  ]
+
+  steps.forEach((step, index) => {
+    lines.push(`${index + 1}) ${step.summary}`)
+    lines.push(`   ${step.command}`)
+    lines.push('')
+  })
+
+  lines.push(
+    'Re-run your command afterward and it will be detected automatically.'
+  )
+
+  return lines.join('\n')
 }
 
 export function locateSafariOrExplain (
